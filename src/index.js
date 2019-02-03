@@ -62,6 +62,20 @@ export default class SwipeUpDown extends Component<Props> {
   componentDidMount() {
     this.props.hasRef && this.props.hasRef(this);
   }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.swipeHeight !== this.SWIPE_HEIGHT) {
+        this.SWIPE_HEIGHT = nextProps.swipeHeight;
+        this.top = nextProps.swipeHeight;
+        this.height = nextProps.swipeHeight;
+        this.customStyle = {
+            style: {
+                bottom: 0,
+                top: this.top,
+                height: this.height
+            }
+        };
+    }
+ }
 
   updateNativeProps() {
     switch (this.props.animation) {
